@@ -16,10 +16,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
-        let vc = ViewController()
-        let rootViewController = UINavigationController(rootViewController: vc)
+        let isUser = UserDefaults.standard.bool(forKey: "isUser")
         
-        window?.rootViewController = rootViewController // sb entrypoint
+        if isUser {
+            let vc = ViewController()
+            let rootViewController = UINavigationController(rootViewController: vc)
+            
+            window?.rootViewController = rootViewController // sb entrypoint
+        } else {
+            let vc = OnBoardingViewController()
+            let rootViewController = UINavigationController(rootViewController: vc)
+            
+            window?.rootViewController = rootViewController // sb entrypoint
+        }
+        
+
         window?.makeKeyAndVisible() // show
     }
 

@@ -25,4 +25,12 @@ enum Font {
     static let regular15 = UIFont.systemFont(ofSize: 15)
     static let regular14 = UIFont.systemFont(ofSize: 14)
     static let regular13 = UIFont.systemFont(ofSize: 13)
+    
+    static let logo = UIFont(name: "Rockwell Bold", size: 40)
+
+}
+
+enum Image {
+    static let empty = UIImage(named: "empty")
+    static let launch = UIImage(named: "launch")
 }

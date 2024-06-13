@@ -21,6 +21,8 @@
 		A0EE57922C1B057300A5E53B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A0EE57912C1B057300A5E53B /* Kingfisher */; };
 		A0EE57952C1B057E00A5E53B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A0EE57942C1B057E00A5E53B /* Alamofire */; };
 		A0EE57982C1B058800A5E53B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A0EE57972C1B058800A5E53B /* SnapKit */; };
+		A0EE579A2C1B0A1300A5E53B /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE57992C1B0A1300A5E53B /* OnBoardingViewController.swift */; };
+		A0EE579D2C1B10DE00A5E53B /* PointButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE579C2C1B10DE00A5E53B /* PointButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		A0EE57852C1AFF4200A5E53B /* ReuseIdnetifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdnetifierProtocol.swift; sourceTree = "<group>"; };
 		A0EE57872C1B00D500A5E53B /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		A0EE578A2C1B027E00A5E53B /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		A0EE57992C1B0A1300A5E53B /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		A0EE579C2C1B10DE00A5E53B /* PointButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,8 @@
 				A0EE57852C1AFF4200A5E53B /* ReuseIdnetifierProtocol.swift */,
 				A0EE57892C1B00D900A5E53B /* Constant */,
 				A0EE578C2C1B02B200A5E53B /* Extension */,
+				A0EE579B2C1B10A800A5E53B /* CustomView */,
+				A0EE57992C1B0A1300A5E53B /* OnBoardingViewController.swift */,
 			);
 			path = ShoppingCart;
 			sourceTree = "<group>";
@@ -101,6 +107,14 @@
 				A0EE578A2C1B027E00A5E53B /* UIColor+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		A0EE579B2C1B10A800A5E53B /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				A0EE579C2C1B10DE00A5E53B /* PointButton.swift */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,7 +202,9 @@
 			files = (
 				A0EE578B2C1B027E00A5E53B /* UIColor+Extension.swift in Sources */,
 				A0EE57862C1AFF4200A5E53B /* ReuseIdnetifierProtocol.swift in Sources */,
+				A0EE579D2C1B10DE00A5E53B /* PointButton.swift in Sources */,
 				A0EE57702C1AF8BE00A5E53B /* ViewController.swift in Sources */,
+				A0EE579A2C1B0A1300A5E53B /* OnBoardingViewController.swift in Sources */,
 				A0EE576C2C1AF8BE00A5E53B /* AppDelegate.swift in Sources */,
 				A0EE57822C1AF9E600A5E53B /* APIKey.swift in Sources */,
 				A0EE576E2C1AF8BE00A5E53B /* SceneDelegate.swift in Sources */,
