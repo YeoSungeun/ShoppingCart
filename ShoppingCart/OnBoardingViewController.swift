@@ -58,7 +58,9 @@ class OnBoardingViewController: UIViewController {
         
     }
     @objc func startButtonClicked() {
-        
+        let vc = ProfileNicknameSettingViewController()
+        vc.viewType = .setting
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     
