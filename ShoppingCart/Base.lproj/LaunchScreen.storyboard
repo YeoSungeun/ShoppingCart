@@ -18,22 +18,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MeaningOut" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLG-W7-ljI">
-                                <rect key="frame" x="60" y="209" width="273" height="40"/>
+                                <rect key="frame" x="60" y="209" width="273" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="SRk-nj-3PP"/>
+                                    <constraint firstAttribute="height" constant="60" id="SRk-nj-3PP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Rockwell-Bold" family="Rockwell" pointSize="40"/>
                                 <color key="textColor" red="0.93725490196078431" green="0.53725490196078429" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="SYd-bQ-SCK">
-                                <rect key="frame" x="50" y="299" width="293" height="263"/>
+                                <rect key="frame" x="50" y="319" width="293" height="263"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="SYd-bQ-SCK" secondAttribute="height" multiplier="293:263" id="9gM-d4-ddh"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="여성은" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MQF-OH-4IU">
-                                <rect key="frame" x="40" y="562" width="313" height="40"/>
+                                <rect key="frame" x="40" y="582" width="313" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="qaM-Iw-afV"/>
                                 </constraints>
