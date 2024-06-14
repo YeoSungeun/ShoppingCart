@@ -21,6 +21,11 @@ class OnBoardingViewController: UIViewController {
         configureLayout()
         configureUI()
     }
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        startButton.layoutIfNeeded()
+        startButton.layer.cornerRadius = startButton.frame.height / 2
+    }
     func configurHierachy() {
         view.addSubview(logo)
         view.addSubview(logoImageView)

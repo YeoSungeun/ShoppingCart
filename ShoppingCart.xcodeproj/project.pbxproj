@@ -25,6 +25,7 @@
 		A0EE579D2C1B10DE00A5E53B /* PointButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE579C2C1B10DE00A5E53B /* PointButton.swift */; };
 		A0EE57A12C1B17EA00A5E53B /* ProfileNicknameSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE57A02C1B17EA00A5E53B /* ProfileNicknameSettingViewController.swift */; };
 		A0EE57A32C1B17F700A5E53B /* ProfileImageSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE57A22C1B17F700A5E53B /* ProfileImageSettingViewController.swift */; };
+		A0EE57A72C1C0A4400A5E53B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE57A62C1C0A4400A5E53B /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		A0EE579C2C1B10DE00A5E53B /* PointButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointButton.swift; sourceTree = "<group>"; };
 		A0EE57A02C1B17EA00A5E53B /* ProfileNicknameSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNicknameSettingViewController.swift; sourceTree = "<group>"; };
 		A0EE57A22C1B17F700A5E53B /* ProfileImageSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSettingViewController.swift; sourceTree = "<group>"; };
+		A0EE57A62C1C0A4400A5E53B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				A0EE579C2C1B10DE00A5E53B /* PointButton.swift */,
+				A0EE57A62C1C0A4400A5E53B /* ProfileView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0EE57A72C1C0A4400A5E53B /* ProfileView.swift in Sources */,
 				A0EE578B2C1B027E00A5E53B /* UIColor+Extension.swift in Sources */,
 				A0EE57862C1AFF4200A5E53B /* ReuseIdnetifierProtocol.swift in Sources */,
 				A0EE579D2C1B10DE00A5E53B /* PointButton.swift in Sources */,
