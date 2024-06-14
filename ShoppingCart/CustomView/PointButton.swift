@@ -14,7 +14,6 @@ class PointButton: UIButton {
         setTitle(title, for: .normal)
         setTitleColor(Color.white, for: .normal)
         backgroundColor = Color.mainColor
-        layer.cornerRadius = 25
         titleLabel?.font = Font.bold16
     }
     
@@ -22,3 +21,4 @@ class PointButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
