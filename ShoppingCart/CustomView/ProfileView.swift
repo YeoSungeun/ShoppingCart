@@ -16,20 +16,22 @@ class SettingProfileView: UIView {
     let cameraBackView = UIView()
     let cameraImageView = UIImageView()
     
-    init(profile: ProfileImage, type: ProfileImageType) {
+    init(profile: String) {
         super.init(frame: .zero)
         
         configureHierarchy()
         configureLayout()
         configureUI(profile: profile)
-        switch type {
-        case .setting:
-            setCameraImgaeView()
-        case .selected:
-            setSelectedView()
-        case .unselected:
-            setUnselectedView()
-        }
+
+    }
+    
+    init(profile: String, type: ProfileImageType) {
+        super.init(frame: .zero)
+        
+        configureHierarchy()
+        configureLayout()
+        configureUI(profile: profile)
+        configureType(type: type)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -42,19 +44,25 @@ class SettingProfileView: UIView {
         self.snp.makeConstraints { make in
             make.height.equalTo(self.snp.width)
         }
-
         profileSettingButton.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             
         }
     }
-    func configureUI(profile: ProfileImage) {
-        profileSettingButton.setImage(UIImage(named: profile.rawValue), for: .normal)
+    func configureUI(profile: String) {
+        profileSettingButton.setImage(UIImage(named: profile), for: .normal)
         profileSettingButton.contentMode = .scaleAspectFill
-        
-        
         profileSettingButton.clipsToBounds = true
-        
+    }
+    func configureType(type: ProfileImageType) {
+        switch type {
+        case .setting:
+            setCameraImgaeView()
+        case .selected:
+            setSelectedView()
+        case .unselected:
+            setUnselectedView()
+        }
     }
     func setCameraImgaeView() {
         self.addSubview(cameraBackView)
@@ -78,15 +86,22 @@ class SettingProfileView: UIView {
         
         profileSettingButton.layer.borderWidth = 3
         profileSettingButton.layer.borderColor = Color.mainColor.cgColor
- 
+        profileSettingButton.layer.cornerRadius = 50
+     
     }
     func setUnselectedView() {
         profileSettingButton.layer.borderWidth = 1
         self.alpha = 0.5
+        profileSettingButton.layer.borderColor = Color.darkgray.cgColor
+        profileSettingButton.isEnabled = false
+        profileSettingButton.adjustsImageWhenDisabled = false
     }
     func setSelectedView() {
         profileSettingButton.layer.borderWidth = 3
+        self.alpha = 1
         profileSettingButton.layer.borderColor = Color.mainColor.cgColor
+        profileSettingButton.isEnabled = false
+        profileSettingButton.adjustsImageWhenDisabled = false
     }
 }
 
@@ -101,6 +116,9 @@ enum ProfileImage: String, CaseIterable {
     case profile_7
     case profile_8
     case profile_9
+    case profile_10
+    case profile_11
+
 }
 
 enum ProfileImageType {
