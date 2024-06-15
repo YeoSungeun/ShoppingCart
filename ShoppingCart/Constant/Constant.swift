@@ -34,3 +34,8 @@ enum Image {
     static let empty = UIImage(named: "empty")
     static let launch = UIImage(named: "launch")
 }
+
+enum UserDefaultsKey {
+    static let profileName = "profileName"
+}
+
