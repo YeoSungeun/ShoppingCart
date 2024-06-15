@@ -37,5 +37,7 @@ enum Image {
 
 enum UserDefaultsKey {
     static let profileName = "profileName"
+    static let UserNickname = "UserNickname"
+    static let isUser = "isUser"
 }
 

@@ -25,6 +25,8 @@ class ProfileNicknameSettingViewController: UIViewController {
     let conditionLabel = UILabel()
     let doneButton = PointButton(title: "완료")
     
+    var isDoneButton = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         var udProfileName = UserDefaults.standard.string(forKey: UserDefaultsKey.profileName)
@@ -93,6 +95,7 @@ class ProfileNicknameSettingViewController: UIViewController {
         navigationItem.title = viewType.rawValue
         
         view.backgroundColor = .white
+        
         var udProfileName = UserDefaults.standard.string(forKey: UserDefaultsKey.profileName)
         if let udProfileName {
             profileView.configureUI(profile: udProfileName)
@@ -100,6 +103,7 @@ class ProfileNicknameSettingViewController: UIViewController {
             profileView.configureUI(profile: randomProfileName)
         }
         
+        nicknameTextField.delegate = self
         nicknameTextField.textColor = Color.lightgray
         nicknameTextField.placeholder = "닉네임을 입력해주세요 :)"
         nicknameTextField.font = Font.bold14
@@ -109,15 +113,20 @@ class ProfileNicknameSettingViewController: UIViewController {
         
         profileView.profileSettingButton.addTarget(self, action: #selector(profileSettingButtonClicked), for: .touchUpInside)
         doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
-        
+            
         
     }
     @objc func backButtonClicked() {
-        var udProfileName = UserDefaults.standard.string(forKey: UserDefaultsKey.profileName)
+        let udProfileName = UserDefaults.standard.string(forKey: UserDefaultsKey.profileName)
+        let udNickName = UserDefaults.standard.string(forKey: UserDefaultsKey.UserNickname)
+        
         if udProfileName != nil {
-            UserDefaults.standard.removeObject(forKey: "profileName")
-            print(#function)
+            UserDefaults.standard.removeObject(forKey: UserDefaultsKey.profileName)
         }
+        if udNickName != nil {
+            UserDefaults.standard.removeObject(forKey: UserDefaultsKey.UserNickname)
+        }
+        
         navigationController?.popViewController(animated: true)
     }
     
@@ -139,32 +148,58 @@ class ProfileNicknameSettingViewController: UIViewController {
         
     }
     @objc func doneButtonClicked() {
-        let nickname = nicknameTextField.text
-        UserDefaults.standard.set(nickname, forKey: "UserNickname")
-        print("\(UserDefaults.standard.string(forKey: "UserNickname"))")
-        UserDefaults.standard.set(true, forKey: "isUser")
-        print("\(UserDefaults.standard.bool(forKey: "isUser"))")
-        
-        var udProfileName = UserDefaults.standard.string(forKey: UserDefaultsKey.profileName)
-        if let udProfileName {
+        if isDoneButton {
+            let nickname = nicknameTextField.text
+            UserDefaults.standard.set(nickname, forKey: "UserNickname")
+            print("\(UserDefaults.standard.string(forKey: "UserNickname"))")
+            UserDefaults.standard.set(true, forKey: "isUser")
+            print("\(UserDefaults.standard.bool(forKey: "isUser"))")
             
-        } else {
-            UserDefaults.standard.set(randomProfileName, forKey: UserDefaultsKey.profileName)
-            print("\(UserDefaults.standard.string(forKey: UserDefaultsKey.profileName))")
+            let udProfileName = UserDefaults.standard.string(forKey: UserDefaultsKey.profileName)
+            
+            if udProfileName == nil {
+                UserDefaults.standard.set(randomProfileName, forKey: UserDefaultsKey.profileName)
+                print("udprofile rand로 저장일경우\(UserDefaults.standard.string(forKey: UserDefaultsKey.profileName))")
+            }
+            
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene // first: 보여지는 화면 개수 (어차피 아이폰은 하나!)
+            
+            let sceneDelgate = windowScene?.delegate as? SceneDelegate // SceneDelegate 파일에 접근할 수 있음
+            
+            let vc = MainTabBarViewController()
+            let rootViewController = UINavigationController(rootViewController: vc)
+            
+            sceneDelgate?.window?.rootViewController = rootViewController // sb entrypoint
+            sceneDelgate?.window?.makeKeyAndVisible() // show
         }
-        
-        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene // first: 보여지는 화면 개수 (어차피 아이폰은 하나!)
-        
-        let sceneDelgate = windowScene?.delegate as? SceneDelegate // SceneDelegate 파일에 접근할 수 있음
-        
-        let vc = MainTabBarViewController()
-        let rootViewController = UINavigationController(rootViewController: vc)
-        
-        sceneDelgate?.window?.rootViewController = rootViewController // sb entrypoint
-        sceneDelgate?.window?.makeKeyAndVisible() // show
         
     }
     
+    
+}
+
+extension ProfileNicknameSettingViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        var numCharSet: CharacterSet = CharacterSet()
+        numCharSet.insert(charactersIn: "0123456789")
+        var specialCharSet: CharacterSet = CharacterSet()
+        specialCharSet.insert(charactersIn: "@#$%")
+        
+        if let nicknameLength = nicknameTextField.text?.count, let nicknameText = nicknameTextField.text {
+            print(nicknameLength)
+            if nicknameLength < 2 || nicknameLength > 9 {
+                conditionLabel.text = "2글자 이상 10글자 미만으로 설정해주세요"
+            } else if nicknameText.rangeOfCharacter(from: specialCharSet) != nil {
+                conditionLabel.text = "닉네임에 @, #, $, % 는 포함할 수 없어요"
+            } else if nicknameText.rangeOfCharacter(from: numCharSet) != nil {
+                conditionLabel.text = "닉네임에 숫자는 포함할 수 없어요"
+            }  else {
+                conditionLabel.text = "사용할 수 있는 닉네임이에요"
+                isDoneButton = true
+                
+            }
+        }
+    }
     
 }
 
