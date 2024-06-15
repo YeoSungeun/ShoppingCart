@@ -26,6 +26,12 @@
 		A0EE57A12C1B17EA00A5E53B /* ProfileNicknameSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE57A02C1B17EA00A5E53B /* ProfileNicknameSettingViewController.swift */; };
 		A0EE57A32C1B17F700A5E53B /* ProfileImageSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE57A22C1B17F700A5E53B /* ProfileImageSettingViewController.swift */; };
 		A0EE57A72C1C0A4400A5E53B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE57A62C1C0A4400A5E53B /* ProfileView.swift */; };
+		A0EE57AB2C1C30A500A5E53B /* SearchMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE57AA2C1C30A500A5E53B /* SearchMainViewController.swift */; };
+		A0EE57AD2C1C30B500A5E53B /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE57AC2C1C30B500A5E53B /* SearchResultViewController.swift */; };
+		A0EE57AF2C1C30D600A5E53B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE57AE2C1C30D600A5E53B /* DetailViewController.swift */; };
+		A0EE57B12C1C30E300A5E53B /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE57B02C1C30E300A5E53B /* SettingViewController.swift */; };
+		A0EE57B32C1C326700A5E53B /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE57B22C1C326700A5E53B /* MainTabBarViewController.swift */; };
+		A0EE57B52C1D757400A5E53B /* ProfileImageSettingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE57B42C1D757400A5E53B /* ProfileImageSettingCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +52,12 @@
 		A0EE57A02C1B17EA00A5E53B /* ProfileNicknameSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNicknameSettingViewController.swift; sourceTree = "<group>"; };
 		A0EE57A22C1B17F700A5E53B /* ProfileImageSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSettingViewController.swift; sourceTree = "<group>"; };
 		A0EE57A62C1C0A4400A5E53B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		A0EE57AA2C1C30A500A5E53B /* SearchMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMainViewController.swift; sourceTree = "<group>"; };
+		A0EE57AC2C1C30B500A5E53B /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		A0EE57AE2C1C30D600A5E53B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		A0EE57B02C1C30E300A5E53B /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		A0EE57B22C1C326700A5E53B /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		A0EE57B42C1D757400A5E53B /* ProfileImageSettingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSettingCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +109,12 @@
 				A0EE57992C1B0A1300A5E53B /* OnBoardingViewController.swift */,
 				A0EE57A02C1B17EA00A5E53B /* ProfileNicknameSettingViewController.swift */,
 				A0EE57A22C1B17F700A5E53B /* ProfileImageSettingViewController.swift */,
+				A0EE57B42C1D757400A5E53B /* ProfileImageSettingCollectionViewCell.swift */,
+				A0EE57AA2C1C30A500A5E53B /* SearchMainViewController.swift */,
+				A0EE57AC2C1C30B500A5E53B /* SearchResultViewController.swift */,
+				A0EE57AE2C1C30D600A5E53B /* DetailViewController.swift */,
+				A0EE57B02C1C30E300A5E53B /* SettingViewController.swift */,
+				A0EE57B22C1C326700A5E53B /* MainTabBarViewController.swift */,
 			);
 			path = ShoppingCart;
 			sourceTree = "<group>";
@@ -210,15 +228,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0EE57A72C1C0A4400A5E53B /* ProfileView.swift in Sources */,
+				A0EE57AB2C1C30A500A5E53B /* SearchMainViewController.swift in Sources */,
 				A0EE578B2C1B027E00A5E53B /* UIColor+Extension.swift in Sources */,
+				A0EE57B32C1C326700A5E53B /* MainTabBarViewController.swift in Sources */,
+				A0EE57B12C1C30E300A5E53B /* SettingViewController.swift in Sources */,
 				A0EE57862C1AFF4200A5E53B /* ReuseIdnetifierProtocol.swift in Sources */,
 				A0EE579D2C1B10DE00A5E53B /* PointButton.swift in Sources */,
 				A0EE57702C1AF8BE00A5E53B /* ViewController.swift in Sources */,
 				A0EE579A2C1B0A1300A5E53B /* OnBoardingViewController.swift in Sources */,
 				A0EE576C2C1AF8BE00A5E53B /* AppDelegate.swift in Sources */,
+				A0EE57AD2C1C30B500A5E53B /* SearchResultViewController.swift in Sources */,
+				A0EE57B52C1D757400A5E53B /* ProfileImageSettingCollectionViewCell.swift in Sources */,
 				A0EE57822C1AF9E600A5E53B /* APIKey.swift in Sources */,
 				A0EE576E2C1AF8BE00A5E53B /* SceneDelegate.swift in Sources */,
 				A0EE57882C1B00D500A5E53B /* Constant.swift in Sources */,
+				A0EE57AF2C1C30D600A5E53B /* DetailViewController.swift in Sources */,
 				A0EE57A12C1B17EA00A5E53B /* ProfileNicknameSettingViewController.swift in Sources */,
 				A0EE57A32C1B17F700A5E53B /* ProfileImageSettingViewController.swift in Sources */,
 			);

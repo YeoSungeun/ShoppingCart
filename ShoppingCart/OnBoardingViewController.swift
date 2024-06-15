@@ -21,6 +21,10 @@ class OnBoardingViewController: UIViewController {
         configureLayout()
         configureUI()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print(#function)
+    }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         startButton.layoutIfNeeded()

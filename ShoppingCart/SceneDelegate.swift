@@ -18,17 +18,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let isUser = UserDefaults.standard.bool(forKey: "isUser")
         
-        if isUser {
-            let vc = ViewController()
-            let rootViewController = UINavigationController(rootViewController: vc)
-            
-            window?.rootViewController = rootViewController // sb entrypoint
-        } else {
+//        if isUser {
+//            let vc = MainTabBarViewController()
+//            let rootViewController = UINavigationController(rootViewController: vc)
+//            
+//            window?.rootViewController = rootViewController // sb entrypoint
+//        } else {
             let vc = OnBoardingViewController()
             let rootViewController = UINavigationController(rootViewController: vc)
             
             window?.rootViewController = rootViewController // sb entrypoint
-        }
+//        }
         
 
         window?.makeKeyAndVisible() // show
