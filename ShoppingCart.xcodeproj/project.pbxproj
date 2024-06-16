@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A08890B72C1EC39C00D8557E /* RecentSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08890B62C1EC39C00D8557E /* RecentSearchTableViewCell.swift */; };
 		A0EE576C2C1AF8BE00A5E53B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE576B2C1AF8BE00A5E53B /* AppDelegate.swift */; };
 		A0EE576E2C1AF8BE00A5E53B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE576D2C1AF8BE00A5E53B /* SceneDelegate.swift */; };
 		A0EE57702C1AF8BE00A5E53B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE576F2C1AF8BE00A5E53B /* ViewController.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A08890B62C1EC39C00D8557E /* RecentSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchTableViewCell.swift; sourceTree = "<group>"; };
 		A0EE57682C1AF8BE00A5E53B /* ShoppingCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0EE576B2C1AF8BE00A5E53B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0EE576D2C1AF8BE00A5E53B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				A0EE57A22C1B17F700A5E53B /* ProfileImageSettingViewController.swift */,
 				A0EE57B42C1D757400A5E53B /* ProfileImageSettingCollectionViewCell.swift */,
 				A0EE57AA2C1C30A500A5E53B /* SearchMainViewController.swift */,
+				A08890B62C1EC39C00D8557E /* RecentSearchTableViewCell.swift */,
 				A0EE57AC2C1C30B500A5E53B /* SearchResultViewController.swift */,
 				A0EE57AE2C1C30D600A5E53B /* DetailViewController.swift */,
 				A0EE57B02C1C30E300A5E53B /* SettingViewController.swift */,
@@ -232,6 +235,7 @@
 				A0EE578B2C1B027E00A5E53B /* UIColor+Extension.swift in Sources */,
 				A0EE57B32C1C326700A5E53B /* MainTabBarViewController.swift in Sources */,
 				A0EE57B12C1C30E300A5E53B /* SettingViewController.swift in Sources */,
+				A08890B72C1EC39C00D8557E /* RecentSearchTableViewCell.swift in Sources */,
 				A0EE57862C1AFF4200A5E53B /* ReuseIdnetifierProtocol.swift in Sources */,
 				A0EE579D2C1B10DE00A5E53B /* PointButton.swift in Sources */,
 				A0EE57702C1AF8BE00A5E53B /* ViewController.swift in Sources */,

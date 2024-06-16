@@ -55,13 +55,10 @@ class RecentSearchTableViewCell: UITableViewCell {
         
         deleteButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         deleteButton.tintColor = Color.black
-        deleteButton.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)
 
     }
     func configureCell(data: String) {
         searchWordLabel.text = data
     }
-    @objc func deleteButtonClicked() {
-        print(#function)
-    }
+    
 }

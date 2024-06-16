@@ -39,5 +39,6 @@ enum UserDefaultsKey {
     static let profileName = "profileName"
     static let UserNickname = "UserNickname"
     static let isUser = "isUser"
+    static let recentSearch = "recentSearch"
 }
 

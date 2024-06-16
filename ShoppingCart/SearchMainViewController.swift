@@ -173,12 +173,29 @@ extension SearchMainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: RecentSearchTableViewCell.id, for: indexPath) as! RecentSearchTableViewCell
         let data = searchList[indexPath.row]
+        cell.deleteButton.tag = indexPath.row
+        cell.deleteButton.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)
         cell.configureCell(data: data)
         
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(#function, indexPath)
+        let vc = SearchResultViewController()
+        vc.searchWord = searchList[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    @objc func deleteButtonClicked(sender: UIButton) {
+        print(#function)
+        print(sender.tag)
+        searchList.remove(at: sender.tag)
+        UserDefaults.standard.set(searchList, forKey: UserDefaultsKey.recentSearch)
+        
+        if searchList.count == 0 {
+            self.loadView()
+            self.viewDidLoad()
+        } else {
+            recentSearchTableView.reloadData()
+        }
     }
     
     
