@@ -20,9 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if isUser {
             let vc = MainTabBarViewController()
-            let rootViewController = UINavigationController(rootViewController: vc)
             
-            window?.rootViewController = rootViewController // sb entrypoint
+            window?.rootViewController = vc // sb entrypoint
         } else {
             let vc = OnBoardingViewController()
             let rootViewController = UINavigationController(rootViewController: vc)

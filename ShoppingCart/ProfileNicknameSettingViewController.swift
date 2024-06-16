@@ -167,9 +167,8 @@ class ProfileNicknameSettingViewController: UIViewController {
             let sceneDelgate = windowScene?.delegate as? SceneDelegate // SceneDelegate 파일에 접근할 수 있음
             
             let vc = MainTabBarViewController()
-            let rootViewController = UINavigationController(rootViewController: vc)
             
-            sceneDelgate?.window?.rootViewController = rootViewController // sb entrypoint
+            sceneDelgate?.window?.rootViewController = vc // sb entrypoint
             sceneDelgate?.window?.makeKeyAndVisible() // show
         }
         
