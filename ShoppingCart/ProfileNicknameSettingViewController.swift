@@ -17,8 +17,10 @@ class ProfileNicknameSettingViewController: UIViewController {
     var viewType: ViewType = .setting
     
     var randomProfileName = ProfileImage.allCases.randomElement()!.rawValue
-//    lazy var udProfileName = UserDefaults.standard.string(forKey: "profileName")
+    var backNickname = UserDefaults.standard.string(forKey: UserDefaultsKey.UserNickname)
+    
     lazy var profileView = SettingProfileView(profile: randomProfileName, type: .setting)
+    
     
     let nicknameTextField = UITextField()
     let devider = UIView()
@@ -41,6 +43,11 @@ class ProfileNicknameSettingViewController: UIViewController {
         print(#function,udProfileName)
         if let udProfileName {
             profileView.configureUI(profile: udProfileName)
+        }
+        var udnickname = UserDefaults.standard.string(forKey: UserDefaultsKey.UserNickname)
+        print(#function,udnickname)
+        if let udnickname {
+            nicknameTextField.text = udnickname
         }
     }
     
@@ -81,10 +88,12 @@ class ProfileNicknameSettingViewController: UIViewController {
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(40)
             make.height.equalTo(40)
         }
-        doneButton.snp.makeConstraints { make in
-            make.top.equalTo(conditionLabel.snp.bottom).offset(4)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(40)
-            make.height.equalTo(50)
+        if viewType == .setting {
+            doneButton.snp.makeConstraints { make in
+                make.top.equalTo(conditionLabel.snp.bottom).offset(4)
+                make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(40)
+                make.height.equalTo(50)
+            }
         }
         
     }
@@ -104,27 +113,39 @@ class ProfileNicknameSettingViewController: UIViewController {
         }
         
         nicknameTextField.delegate = self
-        nicknameTextField.textColor = Color.lightgray
+        nicknameTextField.textColor = Color.black
+        
         nicknameTextField.placeholder = "닉네임을 입력해주세요 :)"
+        if let nickname = UserDefaults.standard.string(forKey: UserDefaultsKey.UserNickname) {
+            nicknameTextField.text = nickname
+        }
         nicknameTextField.font = Font.bold14
         devider.backgroundColor = Color.lightgray
         conditionLabel.textColor = Color.mainColor
         conditionLabel.font = Font.bold13
         
         profileView.profileSettingButton.addTarget(self, action: #selector(profileSettingButtonClicked), for: .touchUpInside)
-        doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
-            
+        if viewType == .setting {
+            doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
+        } else if viewType == .edit {
+            let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(doneButtonClicked))
+            navigationItem.rightBarButtonItem = saveButton
+        }
         
     }
     @objc func backButtonClicked() {
-        let udProfileName = UserDefaults.standard.string(forKey: UserDefaultsKey.profileName)
-        let udNickName = UserDefaults.standard.string(forKey: UserDefaultsKey.UserNickname)
-        
-        if udProfileName != nil {
-            UserDefaults.standard.removeObject(forKey: UserDefaultsKey.profileName)
-        }
-        if udNickName != nil {
-            UserDefaults.standard.removeObject(forKey: UserDefaultsKey.UserNickname)
+        if viewType == .setting {
+            let udProfileName = UserDefaults.standard.string(forKey: UserDefaultsKey.profileName)
+            let udNickName = UserDefaults.standard.string(forKey: UserDefaultsKey.UserNickname)
+            
+            if udProfileName != nil {
+                UserDefaults.standard.removeObject(forKey: UserDefaultsKey.profileName)
+            }
+            if udNickName != nil {
+                UserDefaults.standard.removeObject(forKey: UserDefaultsKey.UserNickname)
+            }
+        } else if viewType == .edit {
+            UserDefaults.standard.set(backNickname, forKey: UserDefaultsKey.UserNickname)
         }
         
         navigationController?.popViewController(animated: true)
@@ -132,7 +153,8 @@ class ProfileNicknameSettingViewController: UIViewController {
     
     @objc func profileSettingButtonClicked() {
         let vc = ProfileImageSettingViewController()
-        vc.viewtype = .setting
+        vc.viewtype = viewType
+        print("vc.viewtype",vc.viewtype)
         
         var udProfileName = UserDefaults.standard.string(forKey: UserDefaultsKey.profileName)
         if udProfileName != nil {
@@ -145,31 +167,44 @@ class ProfileNicknameSettingViewController: UIViewController {
             print("profileButtone rand",randomProfileName, udProfileName)
             navigationController?.pushViewController(vc, animated: true)
         }
+        UserDefaults.standard.set(nicknameTextField.text, forKey: UserDefaultsKey.UserNickname)
+
         
     }
     @objc func doneButtonClicked() {
         if isDoneButton {
             let nickname = nicknameTextField.text
-            UserDefaults.standard.set(nickname, forKey: "UserNickname")
-            print("\(UserDefaults.standard.string(forKey: "UserNickname"))")
-            UserDefaults.standard.set(true, forKey: "isUser")
-            print("\(UserDefaults.standard.bool(forKey: "isUser"))")
+            UserDefaults.standard.set(nickname, forKey: UserDefaultsKey.UserNickname)
+            print("\(UserDefaults.standard.string(forKey: UserDefaultsKey.UserNickname))")
+            UserDefaults.standard.set(true, forKey: UserDefaultsKey.isUser)
+            print("\(UserDefaults.standard.bool(forKey: UserDefaultsKey.isUser))")
             
-            let udProfileName = UserDefaults.standard.string(forKey: UserDefaultsKey.profileName)
-            
-            if udProfileName == nil {
-                UserDefaults.standard.set(randomProfileName, forKey: UserDefaultsKey.profileName)
-                print("udprofile rand로 저장일경우\(UserDefaults.standard.string(forKey: UserDefaultsKey.profileName))")
+            if viewType == .setting {
+                let udProfileName = UserDefaults.standard.string(forKey: UserDefaultsKey.profileName)
+                
+                if udProfileName == nil {
+                    UserDefaults.standard.set(randomProfileName, forKey: UserDefaultsKey.profileName)
+                    print("udprofile rand로 저장일경우\(UserDefaults.standard.string(forKey: UserDefaultsKey.profileName))")
+                }
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy. MM. dd 가입"
+                let membershipDate = dateFormatter.string(from: Date())
+                print(membershipDate)
+                UserDefaults.standard.set(membershipDate, forKey: UserDefaultsKey.membershipDate)
+                
+                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene // first: 보여지는 화면 개수 (어차피 아이폰은 하나!)
+                
+                let sceneDelgate = windowScene?.delegate as? SceneDelegate // SceneDelegate 파일에 접근할 수 있음
+                
+                let vc = MainTabBarViewController()
+                
+                sceneDelgate?.window?.rootViewController = vc // sb entrypoint
+                sceneDelgate?.window?.makeKeyAndVisible() // show
+            } else if viewType == .edit {
+                navigationController?.popViewController(animated: true)
             }
             
-            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene // first: 보여지는 화면 개수 (어차피 아이폰은 하나!)
-            
-            let sceneDelgate = windowScene?.delegate as? SceneDelegate // SceneDelegate 파일에 접근할 수 있음
-            
-            let vc = MainTabBarViewController()
-            
-            sceneDelgate?.window?.rootViewController = vc // sb entrypoint
-            sceneDelgate?.window?.makeKeyAndVisible() // show
         }
         
     }
@@ -188,14 +223,16 @@ extension ProfileNicknameSettingViewController: UITextFieldDelegate {
             print(nicknameLength)
             if nicknameLength < 2 || nicknameLength > 9 {
                 conditionLabel.text = "2글자 이상 10글자 미만으로 설정해주세요"
+                isDoneButton = false
             } else if nicknameText.rangeOfCharacter(from: specialCharSet) != nil {
                 conditionLabel.text = "닉네임에 @, #, $, % 는 포함할 수 없어요"
+                isDoneButton = false
             } else if nicknameText.rangeOfCharacter(from: numCharSet) != nil {
                 conditionLabel.text = "닉네임에 숫자는 포함할 수 없어요"
+                isDoneButton = false
             }  else {
                 conditionLabel.text = "사용할 수 있는 닉네임이에요"
                 isDoneButton = true
-                
             }
         }
     }
