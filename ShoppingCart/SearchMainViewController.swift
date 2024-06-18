@@ -159,7 +159,9 @@ extension SearchMainViewController: UISearchBarDelegate {
         }
         recentSearchTableView.reloadData()
         
-        navigationController?.pushViewController(SearchResultViewController(), animated: true)
+        let vc = SearchResultViewController()
+        vc.query = text
+        navigationController?.pushViewController(vc, animated: true)
         
         view.endEditing(true)
     }
@@ -181,12 +183,22 @@ extension SearchMainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = SearchResultViewController()
-        vc.searchWord = searchList[indexPath.row]
+        vc.query = searchList[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
+        
+        var udSearchList = UserDefaults.standard.array(forKey: UserDefaultsKey.recentSearch) as? [String] ?? []
+        let text = searchList[indexPath.row]
+        searchBar.text = text
+        guard let index = udSearchList.firstIndex(of: text) else { return }
+        udSearchList.remove(at: index)
+        udSearchList.insert(text, at: 0)
+        searchList = udSearchList
+        UserDefaults.standard.set(searchList, forKey: UserDefaultsKey.recentSearch)
+        
+        tableView.reloadData()
+        
     }
     @objc func deleteButtonClicked(sender: UIButton) {
-        print(#function)
-        print(sender.tag)
         searchList.remove(at: sender.tag)
         UserDefaults.standard.set(searchList, forKey: UserDefaultsKey.recentSearch)
         
