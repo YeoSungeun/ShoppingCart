@@ -92,10 +92,10 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         if indexPath.section == 1 && indexPath.row != settingList.count-1 {
-                return nil
-            }
-            return indexPath
+            return nil
         }
+        return indexPath
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 0 {
