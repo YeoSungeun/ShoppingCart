@@ -37,14 +37,14 @@ class OnBoardingViewController: UIViewController {
     }
     func configureLayout() {
         logo.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(80)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(120)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(60)
         }
         logoImageView.snp.makeConstraints { make in
-            make.top.equalTo(logo.snp.bottom).offset(60)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(60)
-            make.height.equalTo(logoImageView.snp.width).multipliedBy(1.2)
+            make.top.equalTo(logo.snp.bottom).offset(50)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(50)
+            make.height.equalTo(logoImageView.snp.width).multipliedBy(0.8)
         }
         startButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(50)
@@ -60,8 +60,9 @@ class OnBoardingViewController: UIViewController {
         logo.font = Font.logo
         logo.textColor = Color.mainColor
         
+        logoImageView.clipsToBounds = true
         logoImageView.image = Image.launch
-        logoImageView.contentMode = .scaleAspectFill
+        logoImageView.contentMode = .scaleAspectFit
         
         startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
         
