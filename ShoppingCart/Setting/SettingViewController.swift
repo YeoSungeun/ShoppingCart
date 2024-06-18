@@ -69,10 +69,12 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let profileCell = tableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.id) as! SettingProfileTableViewCell
         let settingCell = tableView.dequeueReusableCell(withIdentifier: SettingListTableViewCell.id) as! SettingListTableViewCell
-
+        
         if indexPath.section == 0 {
             let profileImageName = UserDefaults.standard.string(forKey: UserDefaultsKey.profileName) ?? ""
             profileCell.profileImageView.configureUI(profile: profileImageName)
+            let nickname = UserDefaults.standard.string(forKey: UserDefaultsKey.UserNickname) ?? ""
+            profileCell.nicknameLabel.text = nickname
             return profileCell
         } else if indexPath.section == 1 {
             settingCell.configureCell(data: settingList[indexPath.row])
