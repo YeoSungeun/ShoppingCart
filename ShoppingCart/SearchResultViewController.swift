@@ -27,6 +27,7 @@ class SearchResultViewController: UIViewController {
     
     lazy var resultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
     
+    var totalCount = TotalCount.none
     var sort = Sort.sim
     let sortList = Sort.allCases
     var query = ""
@@ -147,8 +148,12 @@ class SearchResultViewController: UIViewController {
                 self.totalLabel.text = value.totalString
                 if value.total == 0 {
                     print("value.total 0 ")
+                    self.totalCount = .none
+                    self.sortStackView.isHidden = true
                 } else {
                     print("value.total exist")
+                    self.totalCount = .exist
+                    self.sortStackView.isHidden = false
                 }
                 
                 if self.start == 1 {
