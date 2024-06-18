@@ -38,7 +38,6 @@ class SearchResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(#function, sort)
         request(query: query)
         configureHierarchy()
         configureLayout()
@@ -46,7 +45,6 @@ class SearchResultViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(#function,sort)
         start = 1
         request(query: query)
         resultCollectionView.reloadData()
@@ -137,7 +135,6 @@ class SearchResultViewController: UIViewController {
         return layout
     }
     func request(query: String) {
-        print(#function,"sort:\(sort)")
         let url = "https://openapi.naver.com/v1/search/shop.json?query=\(query)&display=\(display)&sort=\(sort.rawValue)&start=\(start)"
         let header: HTTPHeaders = ["X-Naver-Client-Id": APIKey.naverID,
                                    "X-Naver-Client-Secret": APIKey.naverSecret]
@@ -147,11 +144,9 @@ class SearchResultViewController: UIViewController {
             case .success(let value):
                 self.totalLabel.text = value.totalString
                 if value.total == 0 {
-                    print("value.total 0 ")
                     self.totalCount = .none
                     self.sortStackView.isHidden = true
                 } else {
-                    print("value.total exist")
                     self.totalCount = .exist
                     self.sortStackView.isHidden = false
                 }
@@ -177,9 +172,6 @@ class SearchResultViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @objc func sortButtonClicked(sender: UIButton) {
-        print(#function,sort)
-        print(#function,sender.tag,sortList[sender.tag],":sender.tag")
-        
         for button in buttons {
             let buttonSortValue = sortList[button.tag]
             if button.tag == sender.tag {
@@ -190,7 +182,6 @@ class SearchResultViewController: UIViewController {
                 button.configuration = .unselectedStyle(title: buttonSortValue.sortString)
             }
         }
-        print(#function,sort)
     }
     @objc func likeButtontoggled(sender: UIButton) {
         let itemName = resultList.items[sender.tag].productId
