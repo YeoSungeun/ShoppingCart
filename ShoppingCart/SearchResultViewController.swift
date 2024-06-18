@@ -30,7 +30,6 @@ class SearchResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         request(query: query)
         configureHierarchy()
         configureLayout()
@@ -78,6 +77,7 @@ class SearchResultViewController: UIViewController {
         
         view.backgroundColor = .white
         navigationItem.title = query
+//        self.navigationController?.navigationBar.shadowImage = nil
         configureStackView(stackView: sortStackView)
         
         totalLabel.textColor = Color.mainColor
@@ -150,12 +150,13 @@ class SearchResultViewController: UIViewController {
     }
     @objc func sortButtonClicked(sender: UIButton) {
         for button in buttons {
-            sort = sortList[button.tag]
+            let clickedSort = sortList[button.tag]
             if button.tag == sender.tag {
-                button.configuration = .selectedStyle(title: sort.sortString)
+                button.configuration = .selectedStyle(title: clickedSort.sortString)
                 request(query: query)
+                sort = clickedSort
             } else {
-                button.configuration = .unselectedStyle(title: sort.sortString)
+                button.configuration = .unselectedStyle(title: clickedSort.sortString)
             }
         }
     }
