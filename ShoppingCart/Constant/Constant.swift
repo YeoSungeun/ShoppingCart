@@ -11,7 +11,7 @@ enum Color {
     static let mainColor = UIColor(rgb: 0xEF8947)
     static let black = UIColor(rgb: 0x000000)
     static let darkgray = UIColor(rgb: 0x4C4C4C)
-    static let gray = UIColor(rgb: 828282)
+    static let gray = UIColor(rgb: 0x828282)
     static let lightgray = UIColor(rgb: 0xCDCDCD)
     static let white = UIColor(rgb: 0xFFFFFF)
 }
@@ -59,5 +59,7 @@ enum UserDefaultsKey {
     static let UserNickname = "UserNickname"
     static let isUser = "isUser"
     static let recentSearch = "recentSearch"
+    static let likeList = "likeList"
+    static let membershipDate = "membershipDate"
 }
 
