@@ -9,6 +9,11 @@ import UIKit
 import Alamofire
 import Kingfisher
 
+enum TotalCount {
+    case none
+    case exist
+}
+
 class SearchResultViewController: UIViewController {
     
     let totalLabel = UILabel()
@@ -18,7 +23,8 @@ class SearchResultViewController: UIViewController {
     let dateButton = UIButton()
     let ascButton = UIButton()
     let dscButton = UIButton()
-    lazy var buttons: [UIButton] = [simButton, dateButton, ascButton, dscButton]
+    lazy var buttons: [UIButton] = [simButton, dateButton, dscButton, ascButton]
+    
     lazy var resultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
     
     var sort = Sort.sim
@@ -27,10 +33,11 @@ class SearchResultViewController: UIViewController {
     let display = 30
     var start = 1
     var total = 0
-    var resultList = Result(total: 0, start: 0, display: 0, items: [])
+    var resultList = Result(total: 0, start: 1, display: 0, items: [Item(title: "", link: "", image: "", lprice: "", mallName: "", productId: "")])
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(#function, sort)
         request(query: query)
         configureHierarchy()
         configureLayout()
@@ -38,19 +45,23 @@ class SearchResultViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print(#function,sort)
         start = 1
         request(query: query)
         resultCollectionView.reloadData()
+        
     }
     func configureHierarchy() {
         view.addSubview(totalLabel)
         view.addSubview(devider)
+        
         view.addSubview(sortStackView)
         sortStackView.addArrangedSubview(simButton)
         sortStackView.addArrangedSubview(dateButton)
-        sortStackView.addArrangedSubview(ascButton)
         sortStackView.addArrangedSubview(dscButton)
+        sortStackView.addArrangedSubview(ascButton)
         view.addSubview(resultCollectionView)
+        
     }
     func configureLayout() {
         let safeArea = view.safeAreaLayoutGuide
@@ -81,34 +92,33 @@ class SearchResultViewController: UIViewController {
         resultCollectionView.dataSource = self
         resultCollectionView.prefetchDataSource = self
         resultCollectionView.register(ResultCollectionViewCell.self, forCellWithReuseIdentifier: ResultCollectionViewCell.id)
-        
+        resultCollectionView.backgroundColor = .white
         view.backgroundColor = .white
         navigationItem.title = query
-        configureStackView(stackView: sortStackView)
-        
-        devider.backgroundColor = Color.lightgray.withAlphaComponent(0.5)
-        totalLabel.textColor = Color.mainColor
-        totalLabel.font = Font.bold14
         
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonClicked))
         backButton.tintColor = Color.darkgray
         navigationItem.leftBarButtonItem = backButton
         
-        resultCollectionView.backgroundColor = .white
+        devider.backgroundColor = Color.lightgray.withAlphaComponent(0.5)
+        totalLabel.textColor = Color.mainColor
+        totalLabel.font = Font.bold14
         
+        configureStackView(stackView: sortStackView)
         simButton.configuration = .selectedStyle(title: sortList[0].sortString)
         simButton.tag = 0
         dateButton.configuration = .unselectedStyle(title: sortList[1].sortString)
         dateButton.tag = 1
-        ascButton.configuration = .unselectedStyle(title: sortList[2].sortString)
-        ascButton.tag = 2
-        dscButton.configuration = .unselectedStyle(title: sortList[3].sortString)
-        dscButton.tag = 3
+        dscButton.configuration = .unselectedStyle(title: sortList[2].sortString)
+        dscButton.tag = 2
+        ascButton.configuration = .unselectedStyle(title: sortList[3].sortString)
+        ascButton.tag = 3
         
         for button in buttons {
             button.addTarget(self, action: #selector(sortButtonClicked), for: .touchUpInside)
         }
     }
+    
     func configureStackView(stackView: UIStackView){
         stackView.axis = .horizontal
         stackView.alignment = .fill
@@ -126,7 +136,7 @@ class SearchResultViewController: UIViewController {
         return layout
     }
     func request(query: String) {
-        
+        print(#function,"sort:\(sort)")
         let url = "https://openapi.naver.com/v1/search/shop.json?query=\(query)&display=\(display)&sort=\(sort.rawValue)&start=\(start)"
         let header: HTTPHeaders = ["X-Naver-Client-Id": APIKey.naverID,
                                    "X-Naver-Client-Secret": APIKey.naverSecret]
@@ -134,7 +144,12 @@ class SearchResultViewController: UIViewController {
         AF.request(url, headers: header).responseDecodable(of: Result.self) { response in
             switch response.result {
             case .success(let value):
-                self.totalLabel.text = self.resultList.totalString
+                self.totalLabel.text = value.totalString
+                if value.total == 0 {
+                    print("value.total 0 ")
+                } else {
+                    print("value.total exist")
+                }
                 
                 if self.start == 1 {
                     self.resultList = value
@@ -144,6 +159,7 @@ class SearchResultViewController: UIViewController {
                 self.resultCollectionView.reloadData()
                 
                 if self.start == 1 {
+                    guard value.total != 0 else { return }
                     self.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
                 }
                 
@@ -156,16 +172,20 @@ class SearchResultViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @objc func sortButtonClicked(sender: UIButton) {
+        print(#function,sort)
+        print(#function,sender.tag,sortList[sender.tag],":sender.tag")
+        
         for button in buttons {
-            let clickedSort = sortList[button.tag]
+            let buttonSortValue = sortList[button.tag]
             if button.tag == sender.tag {
-                button.configuration = .selectedStyle(title: clickedSort.sortString)
+                button.configuration = .selectedStyle(title: buttonSortValue.sortString)
+                sort = buttonSortValue
                 request(query: query)
-                sort = clickedSort
             } else {
-                button.configuration = .unselectedStyle(title: clickedSort.sortString)
+                button.configuration = .unselectedStyle(title: buttonSortValue.sortString)
             }
         }
+        print(#function,sort)
     }
     @objc func likeButtontoggled(sender: UIButton) {
         let itemName = resultList.items[sender.tag].productId

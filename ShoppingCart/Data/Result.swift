@@ -31,8 +31,10 @@ struct Item: Decodable {
         return url
     }
     var lpriceformat: String {
-        let string = "\(Int(lprice)!.formatted())원"
-        return string
+        guard let string = Int(lprice) else {
+            return ""
+        }
+        return "\(string.formatted())원"
     }
     var imageURL: URL? {
         let url = URL(string: image)
