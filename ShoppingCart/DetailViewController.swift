@@ -66,7 +66,15 @@ class DetailViewController: UIViewController {
     @objc func backButtonClicked() {
         navigationController?.popViewController(animated: true)
     }
+    @objc func likeButtontoggled() {
+        var likeList = UserDefaults.standard.array(forKey: UserDefaultsKey.likeList) as? [String] ?? []
+        if likeList.contains(itemId) {
+            guard let index = likeList.firstIndex(of: itemId) else { return }
+            likeList.remove(at: index)
+        } else {
+            likeList.append(itemId)
+        }
+        UserDefaults.standard.set(likeList, forKey: UserDefaultsKey.likeList)
+        configureNavigationButton()
     }
-    */
-
 }
