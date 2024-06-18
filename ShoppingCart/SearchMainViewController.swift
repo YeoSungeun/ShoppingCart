@@ -45,8 +45,12 @@ class SearchMainViewController: UIViewController {
         configureView()
         
     }
-
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        guard let nickname = UserDefaults.standard.string(forKey: UserDefaultsKey.UserNickname) else { return }
+        navigationItem.title = "\(nickname)'s MEANING OUT"
+        
+    }
     func configureHierarchy() {
         view.addSubview(searchBar)
         if searchList.count == 0 {
