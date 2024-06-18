@@ -146,6 +146,10 @@ extension SearchMainViewController: UISearchBarDelegate {
         // 최근검색어 저장
         var udSearchList = UserDefaults.standard.array(forKey: UserDefaultsKey.recentSearch) as? [String] ?? []
         guard let text = searchBar.text else { return }
+        if udSearchList.contains(text) {
+            guard let index = udSearchList.firstIndex(of: text) else { return }
+            udSearchList.remove(at: index)
+        }
         udSearchList.insert(text, at: 0)
         searchList = udSearchList
         UserDefaults.standard.set(searchList, forKey: UserDefaultsKey.recentSearch)
@@ -158,6 +162,8 @@ extension SearchMainViewController: UISearchBarDelegate {
         let vc = SearchResultViewController()
         vc.query = text
         navigationController?.pushViewController(vc, animated: true)
+        
+        searchBar.text = ""
         
         view.endEditing(true)
     }
@@ -192,6 +198,8 @@ extension SearchMainViewController: UITableViewDelegate, UITableViewDataSource {
         UserDefaults.standard.set(searchList, forKey: UserDefaultsKey.recentSearch)
         
         tableView.reloadData()
+        
+        searchBar.text = ""
         
     }
     @objc func deleteButtonClicked(sender: UIButton) {

@@ -12,6 +12,7 @@ import Kingfisher
 class SearchResultViewController: UIViewController {
     
     let totalLabel = UILabel()
+    let devider = UIView()
     var sortStackView = UIStackView()
     let simButton = UIButton()
     let dateButton = UIButton()
@@ -43,6 +44,7 @@ class SearchResultViewController: UIViewController {
     }
     func configureHierarchy() {
         view.addSubview(totalLabel)
+        view.addSubview(devider)
         view.addSubview(sortStackView)
         sortStackView.addArrangedSubview(simButton)
         sortStackView.addArrangedSubview(dateButton)
@@ -52,8 +54,13 @@ class SearchResultViewController: UIViewController {
     }
     func configureLayout() {
         let safeArea = view.safeAreaLayoutGuide
+        devider.snp.makeConstraints { make in
+            make.top.equalTo(safeArea)
+            make.horizontalEdges.equalTo(safeArea).inset(20)
+            make.height.equalTo(0.5)
+        }
         totalLabel.snp.makeConstraints { make in
-            make.top.equalTo(safeArea).offset(16)
+            make.top.equalTo(devider.snp.bottom).offset(16)
             make.leading.equalTo(safeArea).offset(20)
             make.height.equalTo(32)
         }
@@ -77,9 +84,9 @@ class SearchResultViewController: UIViewController {
         
         view.backgroundColor = .white
         navigationItem.title = query
-//        self.navigationController?.navigationBar.shadowImage = nil
         configureStackView(stackView: sortStackView)
         
+        devider.backgroundColor = Color.lightgray.withAlphaComponent(0.5)
         totalLabel.textColor = Color.mainColor
         totalLabel.font = Font.bold14
         
