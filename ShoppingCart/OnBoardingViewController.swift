@@ -23,7 +23,7 @@ class OnBoardingViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print(#function)
+        
     }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()

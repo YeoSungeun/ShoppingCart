@@ -31,13 +31,11 @@ class SearchMainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 //        searchList.append("dfd")
 //        UserDefaults.standard.set(searchList, forKey: UserDefaultsKey.recentSearch)
         var recentSearch = UserDefaults.standard.array(forKey: UserDefaultsKey.recentSearch) as? [String] ?? []
         searchList = recentSearch
         lazy var count = searchList.count
-        print("viewdidloadcount\(count)")
  
         configureHierarchy()
         configureLayout()
@@ -145,20 +143,14 @@ class SearchMainViewController: UIViewController {
 
 extension SearchMainViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print(#function)
         // 최근검색어 저장
         var udSearchList = UserDefaults.standard.array(forKey: UserDefaultsKey.recentSearch) as? [String] ?? []
-        print(udSearchList)
         guard let text = searchBar.text else { return }
-        print(text)
         udSearchList.insert(text, at: 0)
         searchList = udSearchList
-        print(udSearchList, searchList)
         UserDefaults.standard.set(searchList, forKey: UserDefaultsKey.recentSearch)
-        
-        print(searchList.count)
+     
         if searchList.count == 1 {
-            self.loadView()
             self.viewDidLoad()
         }
         recentSearchTableView.reloadData()

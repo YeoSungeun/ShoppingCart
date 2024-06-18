@@ -38,8 +38,7 @@ class ProfileImageSettingCollectionViewCell: UICollectionViewCell {
     
     func cofigureCell(data: ProfileImage) {
         let udProfileName = UserDefaults.standard.string(forKey: UserDefaultsKey.profileName)
-        print("cofigureCell:\(String(describing: udProfileName))")
-        print("cofigureCell: \(profileName)")
+       
         if data.rawValue == profileName {
             profileImageView.configureUI(profile: data.rawValue)
             profileImageView.configureType(type: .selected)

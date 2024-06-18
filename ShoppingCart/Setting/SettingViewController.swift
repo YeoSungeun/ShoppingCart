@@ -20,7 +20,7 @@ class SettingViewController: UIViewController {
     
     let settingTableVeiw = UITableView()
     let settingList = SettingList.allCases
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHierarchy()
@@ -31,6 +31,7 @@ class SettingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         settingTableVeiw.reloadData()
+        
     }
     func configureHierarchy() {
         view.addSubview(settingTableVeiw)

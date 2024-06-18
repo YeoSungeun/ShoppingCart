@@ -23,7 +23,7 @@ class ProfileImageSettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let udProfileName = UserDefaults.standard.string(forKey: UserDefaultsKey.profileName)
-        print(#function,profileName,udProfileName)
+        
         configureHierarchy()
         configureLayout()
         configureUI()
@@ -62,7 +62,6 @@ class ProfileImageSettingViewController: UIViewController {
         profileImgaeView.profileSettingButton.adjustsImageWhenDisabled = false
         
         profileImgaeView.configureUI(profile: profileName)
-        print("ProfileImageSettingViewController_configureUI:\(profileName)")
         
     }
     func configureView() {
@@ -108,10 +107,7 @@ extension ProfileImageSettingViewController: UICollectionViewDelegate, UICollect
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(#function, indexPath)
-        // profileName 누른 item의 이름으로 변경..~~/ cell 변경은 어떻게 반영하지 ?
-        // profileView 이미지 재설정~~
-        // reloadedata로..₩~
+      
         profileName = profileImageList[indexPath.item].rawValue
         profileImgaeView.configureUI(profile: profileName)
         collectionView.reloadData()

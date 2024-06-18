@@ -67,7 +67,9 @@ class SettingProfileTableViewCell: UITableViewCell {
         profileImageView.configureUI(profile: profileImageName)
         profileImageView.profileSettingButton.layer.cornerRadius = 30
         
+        
         let nickname = UserDefaults.standard.string(forKey: UserDefaultsKey.UserNickname) ?? ""
+       
         nicknameLabel.text = nickname
         nicknameLabel.font = Font.bold16
         
