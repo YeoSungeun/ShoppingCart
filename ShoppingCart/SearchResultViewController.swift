@@ -80,6 +80,9 @@ class SearchResultViewController: UIViewController {
         navigationItem.title = query
         configureStackView(stackView: sortStackView)
         
+        totalLabel.textColor = Color.mainColor
+        totalLabel.font = Font.bold14
+        
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonClicked))
         backButton.tintColor = Color.darkgray
         navigationItem.leftBarButtonItem = backButton
