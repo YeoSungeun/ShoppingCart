@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Alamofire
 import Kingfisher
 
 enum TotalCount {
@@ -135,38 +134,30 @@ class SearchResultViewController: UIViewController {
         return layout
     }
     func request(query: String) {
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(query)&display=\(display)&sort=\(sort.rawValue)&start=\(start)"
-        let header: HTTPHeaders = ["X-Naver-Client-Id": APIKey.naverID,
-                                   "X-Naver-Client-Secret": APIKey.naverSecret]
         
-        AF.request(url, headers: header).responseDecodable(of: Result.self) { response in
-            switch response.result {
-            case .success(let value):
-                self.totalLabel.text = value.totalString
-                if value.total == 0 {
-                    self.totalCount = .none
-                    self.sortStackView.isHidden = true
-                } else {
-                    self.totalCount = .exist
-                    self.sortStackView.isHidden = false
-                }
-                
-                if self.start == 1 {
-                    self.resultList = value
-                } else {
-                    self.resultList.items.append(contentsOf: value.items)
-                }
-                self.resultCollectionView.reloadData()
-                
-                if self.start == 1 {
-                    guard value.total != 0 else { return }
-                    self.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
-                }
-                
-            case .failure(let error):
-                print(error)
+        NetworkManager.shared.getResult(query: query, sort: sort, start: start) { value in
+            self.totalLabel.text = value.totalString
+            if value.total == 0 {
+                self.totalCount = .none
+                self.sortStackView.isHidden = true
+            } else {
+                self.totalCount = .exist
+                self.sortStackView.isHidden = false
+            }
+            
+            if self.start == 1 {
+                self.resultList = value
+            } else {
+                self.resultList.items.append(contentsOf: value.items)
+            }
+            self.resultCollectionView.reloadData()
+            
+            if self.start == 1 {
+                guard value.total != 0 else { return }
+                self.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
             }
         }
+        
     }
     @objc func backButtonClicked() {
         navigationController?.popViewController(animated: true)
@@ -176,6 +167,7 @@ class SearchResultViewController: UIViewController {
             let buttonSortValue = sortList[button.tag]
             if button.tag == sender.tag {
                 button.configuration = .selectedStyle(title: buttonSortValue.sortString)
+                start = 1
                 sort = buttonSortValue
                 request(query: query)
             } else {
