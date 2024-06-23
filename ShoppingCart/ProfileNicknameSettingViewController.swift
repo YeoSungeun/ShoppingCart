@@ -11,6 +11,11 @@ enum ViewType: String {
     case setting = "PROFILE SETTING"
     case edit = "EDIT PROFILE"
 }
+enum VaildationError: Error {
+    case textCountCondition
+    case isSpecialChar
+    case isNumChar
+}
 
 class ProfileNicknameSettingViewController: UIViewController {
     
@@ -213,26 +218,47 @@ class ProfileNicknameSettingViewController: UIViewController {
 
 extension ProfileNicknameSettingViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
+        
+        guard let nickname = nicknameTextField.text else { return }
+        
+        do {
+            let result = try validNickname(text: nickname)
+            conditionLabel.text = "사용할 수 있는 닉네임이에요"
+            isDoneButton = true
+        } catch  VaildationError.textCountCondition {
+            conditionLabel.text = "2글자 이상 10글자 미만으로 설정해주세요"
+            isDoneButton = false
+        } catch  VaildationError.isSpecialChar {
+            conditionLabel.text = "닉네임에 @, #, $, % 는 포함할 수 없어요"
+            isDoneButton = false
+        } catch  VaildationError.isNumChar {
+            conditionLabel.text = "닉네임에 숫자는 포함할 수 없어요"
+            isDoneButton = false
+        } catch {
+            print("ERROR")
+        }
+ 
+    }
+    
+    func validNickname(text: String) throws -> Bool {
         var numCharSet: CharacterSet = CharacterSet()
         numCharSet.insert(charactersIn: "0123456789")
         var specialCharSet: CharacterSet = CharacterSet()
         specialCharSet.insert(charactersIn: "@#$%")
         
-        if let nicknameLength = nicknameTextField.text?.count, let nicknameText = nicknameTextField.text {
-            if nicknameLength < 2 || nicknameLength > 9 {
-                conditionLabel.text = "2글자 이상 10글자 미만으로 설정해주세요"
-                isDoneButton = false
-            } else if nicknameText.rangeOfCharacter(from: specialCharSet) != nil {
-                conditionLabel.text = "닉네임에 @, #, $, % 는 포함할 수 없어요"
-                isDoneButton = false
-            } else if nicknameText.rangeOfCharacter(from: numCharSet) != nil {
-                conditionLabel.text = "닉네임에 숫자는 포함할 수 없어요"
-                isDoneButton = false
-            }  else {
-                conditionLabel.text = "사용할 수 있는 닉네임이에요"
-                isDoneButton = true
-            }
+        guard text.count > 2 && text.count <= 9 else {
+            print("글자 수")
+            throw VaildationError.textCountCondition
         }
+        guard text.rangeOfCharacter(from: specialCharSet) == nil else {
+            print("특수문자")
+            throw VaildationError.isSpecialChar
+        }
+        guard text.rangeOfCharacter(from: numCharSet) == nil else {
+            print("숫자")
+            throw VaildationError.isNumChar
+        }
+        return true
     }
     
 }
