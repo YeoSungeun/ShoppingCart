@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 class ResultCollectionViewCell: UICollectionViewCell {
     
@@ -74,7 +73,19 @@ class ResultCollectionViewCell: UICollectionViewCell {
         lpriceLabel.font = Font.bold15
     }
     func configureCell(data: Item) {
-        itemImageView.kf.setImage(with: data.imageURL)
+        guard let url = data.imageURL else { return }
+        
+        DispatchQueue.global().async {
+            do {
+                let image = try Data(contentsOf: url)
+                DispatchQueue.main.async {
+                    self.itemImageView.image = UIImage(data: image)
+                }
+            } catch {
+                self.itemImageView.image = UIImage(systemName: "star")
+            }
+        }
+        
         mallNameLabel.text = data.mallName
 //        titleLabel.text = data.title
         titleLabel.attributedText = data.title.htmlToAttributedString
