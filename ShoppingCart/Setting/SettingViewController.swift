@@ -104,14 +104,9 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             vc.viewType = .edit
             navigationController?.pushViewController(vc, animated: true)
         } else {
-            // 탈퇴 alert
-            let alert = UIAlertController(
-                title: "탈퇴하기",
-                message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?",
-                preferredStyle: .alert)
-            
-            let okay = UIAlertAction(title: "확인", style: .destructive) { action in
-                
+            showAlert(title: "탈퇴하기",
+                      message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?",
+                      okady: "확인") { action in
                 for key in UserDefaults.standard.dictionaryRepresentation().keys {
                     UserDefaults.standard.removeObject(forKey: key.description)
                 }
@@ -122,14 +117,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 sceneDelgate?.window?.rootViewController = rootViewController
                 sceneDelgate?.window?.makeKeyAndVisible()
             }
-            let cancel = UIAlertAction(title: "취소", style: .cancel)
-            
-            // 3. 합치기 (순서에 따라 달라짐)
-            alert.addAction(cancel) // style이 cancel 이라 위치가 지정
-            alert.addAction(okay)
-            
-            // 4. 화면 보여주기
-            present(alert, animated: true)
+           
         }
         tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: indexPath.section)], with: .automatic)
     }
