@@ -95,7 +95,7 @@ extension ProfileImageSettingViewController: UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageSettingCollectionViewCell.id, for: indexPath) as! ProfileImageSettingCollectionViewCell
+        guard let cell = profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageSettingCollectionViewCell.id, for: indexPath) as? ProfileImageSettingCollectionViewCell else { return UICollectionViewCell() }
         guard let udProfileName = UserDefaults.standard.string(forKey: UserDefaultsKey.profileName) else {
             return cell
         }

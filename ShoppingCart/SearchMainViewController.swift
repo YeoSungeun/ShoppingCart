@@ -23,20 +23,14 @@ class SearchMainViewController: UIViewController {
     
     var searchList: [String] = []
     
-    
-    
-    override func loadView() {
-        super.loadView()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        searchList.append("dfd")
-//        UserDefaults.standard.set(searchList, forKey: UserDefaultsKey.recentSearch)
+        //        searchList.append("dfd")
+        //        UserDefaults.standard.set(searchList, forKey: UserDefaultsKey.recentSearch)
         var recentSearch = UserDefaults.standard.array(forKey: UserDefaultsKey.recentSearch) as? [String] ?? []
         searchList = recentSearch
         lazy var count = searchList.count
- 
+        
         configureHierarchy()
         configureLayout()
         configureUI()
@@ -118,7 +112,7 @@ class SearchMainViewController: UIViewController {
             removeAllSearch.addTarget(self, action: #selector(removeAllButtonClicked), for: .touchUpInside)
             
         }
-
+        
     }
     func configureView() {
         searchBar.delegate = self
@@ -130,13 +124,14 @@ class SearchMainViewController: UIViewController {
             
             recentSearchTableView.rowHeight = 40
         }
-
+        
     }
     
     @objc func removeAllButtonClicked() {
         UserDefaults.standard.removeObject(forKey: UserDefaultsKey.recentSearch)
         searchList = []
         self.loadView()
+        
         self.viewDidLoad()
     }
 }
@@ -153,7 +148,7 @@ extension SearchMainViewController: UISearchBarDelegate {
         udSearchList.insert(text, at: 0)
         searchList = udSearchList
         UserDefaults.standard.set(searchList, forKey: UserDefaultsKey.recentSearch)
-     
+        
         if searchList.count == 1 {
             self.viewDidLoad()
         }
@@ -175,7 +170,9 @@ extension SearchMainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: RecentSearchTableViewCell.id, for: indexPath) as! RecentSearchTableViewCell
+        // MARK: 강제언래핑 바꿔줌 보셈!!! []<-확인란
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RecentSearchTableViewCell.id, for: indexPath) as? RecentSearchTableViewCell else { return UITableViewCell() }
+        
         let data = searchList[indexPath.row]
         cell.deleteButton.tag = indexPath.row
         cell.deleteButton.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)

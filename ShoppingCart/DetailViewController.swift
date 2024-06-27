@@ -44,7 +44,7 @@ class DetailViewController: UIViewController {
         backButton.tintColor = Color.darkgray
         navigationItem.leftBarButtonItem = backButton
         
-        let url = URL(string: "\(itemURLString)") ?? URL(string: "https://www.naver.com")!
+        guard let url = URL(string: "\(itemURLString)") else { return }
         // url에 연산프로퍼티~
         let request = URLRequest(url: url)
         webView.load(request)

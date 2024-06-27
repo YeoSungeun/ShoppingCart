@@ -68,8 +68,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         return 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let profileCell = tableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.id) as! SettingProfileTableViewCell
-        let settingCell = tableView.dequeueReusableCell(withIdentifier: SettingListTableViewCell.id) as! SettingListTableViewCell
+        guard let profileCell = tableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.id) as? SettingProfileTableViewCell else { return UITableViewCell()}
+        guard let settingCell = tableView.dequeueReusableCell(withIdentifier: SettingListTableViewCell.id) as? SettingListTableViewCell else { return UITableViewCell()}
         
         if indexPath.section == 0 {
             let profileImageName = UserDefaults.standard.string(forKey: UserDefaultsKey.profileName) ?? ""

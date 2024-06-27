@@ -140,6 +140,7 @@ class SearchResultViewController: UIViewController {
             if value.total == 0 {
                 self.totalCount = .none
                 self.sortStackView.isHidden = true
+                // 여기에 알럿
             } else {
                 self.totalCount = .exist
                 self.sortStackView.isHidden = false
@@ -197,7 +198,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.id, for: indexPath) as! ResultCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.id, for: indexPath) as? ResultCollectionViewCell else { return UICollectionViewCell() }
         cell.configureCell(data: resultList.items[indexPath.item])
         cell.likeButton.tag = indexPath.item
         cell.likeButton.addTarget(self, action: #selector(likeButtontoggled), for: .touchUpInside)
