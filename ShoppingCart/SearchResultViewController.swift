@@ -135,28 +135,57 @@ class SearchResultViewController: UIViewController {
     }
     func request(query: String) {
         
-        NetworkManager.shared.getResult(query: query, sort: sort, start: start) { value in
-            self.totalLabel.text = value.totalString
-            if value.total == 0 {
-                self.totalCount = .none
-                self.sortStackView.isHidden = true
-                // 여기에 알럿
+//        NetworkManager.shared.getResult(query: query, sort: sort, start: start) { value in
+//            self.totalLabel.text = value.totalString
+//            if value.total == 0 {
+//                self.totalCount = .none
+//                self.sortStackView.isHidden = true
+//                // 여기에 알럿
+//            } else {
+//                self.totalCount = .exist
+//                self.sortStackView.isHidden = false
+//            }
+//            
+//            if self.start == 1 {
+//                self.resultList = value
+//            } else {
+//                self.resultList.items.append(contentsOf: value.items)
+//            }
+//            self.resultCollectionView.reloadData()
+//            
+//            if self.start == 1 {
+//                guard value.total != 0 else { return }
+//                self.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+//            }
+//        }
+        NetworkManager.shared.callRequest(query: query, sort: sort, start: start) { value, error in
+            if error == nil {
+                guard let value = value else { return }
+                self.totalLabel.text = value.totalString
+                if value.total == 0 {
+                    self.totalCount = .none
+                    self.sortStackView.isHidden = true
+                    // 여기에 알럿
+                } else {
+                    self.totalCount = .exist
+                    self.sortStackView.isHidden = false
+                }
+                
+                if self.start == 1 {
+                    self.resultList = value
+                } else {
+                    self.resultList.items.append(contentsOf: value.items)
+                }
+                self.resultCollectionView.reloadData()
+                
+                if self.start == 1 {
+                    guard value.total != 0 else { return }
+                    self.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+                }
             } else {
-                self.totalCount = .exist
-                self.sortStackView.isHidden = false
+                print(error)
             }
             
-            if self.start == 1 {
-                self.resultList = value
-            } else {
-                self.resultList.items.append(contentsOf: value.items)
-            }
-            self.resultCollectionView.reloadData()
-            
-            if self.start == 1 {
-                guard value.total != 0 else { return }
-                self.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
-            }
         }
         
     }
