@@ -15,6 +15,17 @@ enum VaildationError: Error {
     case textCountCondition
     case isSpecialChar
     case isNumChar
+    
+    var errorText: String {
+        switch self {
+        case .textCountCondition:
+            return "2글자 이상 10글자 미만으로 설정해주세요"
+        case .isSpecialChar:
+            return "닉네임에 @, #, $, % 는 포함할 수 없어요"
+        case .isNumChar:
+            return "닉네임에 숫자는 포함할 수 없어요"
+        }
+    }
 }
 
 class ProfileNicknameSettingViewController: UIViewController {
@@ -226,13 +237,13 @@ extension ProfileNicknameSettingViewController: UITextFieldDelegate {
             conditionLabel.text = "사용할 수 있는 닉네임이에요"
             isDoneButton = true
         } catch  VaildationError.textCountCondition {
-            conditionLabel.text = "2글자 이상 10글자 미만으로 설정해주세요"
+            conditionLabel.text = VaildationError.textCountCondition.errorText
             isDoneButton = false
         } catch  VaildationError.isSpecialChar {
-            conditionLabel.text = "닉네임에 @, #, $, % 는 포함할 수 없어요"
+            conditionLabel.text = VaildationError.isSpecialChar.errorText
             isDoneButton = false
         } catch  VaildationError.isNumChar {
-            conditionLabel.text = "닉네임에 숫자는 포함할 수 없어요"
+            conditionLabel.text = VaildationError.isNumChar.errorText
             isDoneButton = false
         } catch {
             print("ERROR")
