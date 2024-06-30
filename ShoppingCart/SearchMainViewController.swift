@@ -21,15 +21,19 @@ class SearchMainViewController: UIViewController {
     let removeAllSearch = UIButton()
     let recentSearchTableView = UITableView()
     
-    var searchList: [String] = []
+    var searchList: [String] = [] {
+        didSet {
+            recentSearchTableView.reloadData()
+        }
+    }
+    lazy var count = searchList.count
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        searchList.append("dfd")
-        //        UserDefaults.standard.set(searchList, forKey: UserDefaultsKey.recentSearch)
-        var recentSearch = UserDefaults.standard.array(forKey: UserDefaultsKey.recentSearch) as? [String] ?? []
+        
+        let recentSearch = UserDefaults.standard.array(forKey: UserDefaultsKey.recentSearch) as? [String] ?? []
         searchList = recentSearch
-        lazy var count = searchList.count
+        count = searchList.count
         
         configureHierarchy()
         configureLayout()
@@ -45,49 +49,47 @@ class SearchMainViewController: UIViewController {
     }
     func configureHierarchy() {
         view.addSubview(searchBar)
-        if searchList.count == 0 {
-            view.addSubview(noSearchImageView)
-            view.addSubview(noSearchLabel)
-        } else {
-            view.addSubview(recentSearchLabel)
-            view.addSubview(removeAllSearch)
-            view.addSubview(recentSearchTableView)
-        }
+        
+        view.addSubview(noSearchImageView)
+        view.addSubview(noSearchLabel)
+        
+        view.addSubview(recentSearchLabel)
+        view.addSubview(removeAllSearch)
+        view.addSubview(recentSearchTableView)
     }
     func configureLayout() {
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
-        if searchList.count == 0 {
-            noSearchImageView.snp.makeConstraints { make in
-                make.centerX.equalToSuperview()
-                make.centerY.equalToSuperview().offset(-50)
-                make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(40)
-                
-            }
-            noSearchLabel.snp.makeConstraints { make in
-                make.top.equalTo(noSearchImageView.snp.bottom).offset(8)
-                make.centerX.equalToSuperview()
-                make.height.equalTo(20)
-            }
-        } else {
-            recentSearchLabel.snp.makeConstraints { make in
-                make.top.equalTo(searchBar.snp.bottom).offset(8)
-                make.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
-                make.height.equalTo(20)
-            }
-            removeAllSearch.snp.makeConstraints { make in
-                make.bottom.equalTo(recentSearchLabel.snp.bottom)
-                make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
-                make.height.equalTo(20)
-            }
-            recentSearchTableView.snp.makeConstraints { make in
-                make.top.equalTo(recentSearchLabel.snp.bottom).offset(8)
-                make.horizontalEdges.bottom.equalToSuperview()
-            }
+        noSearchImageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-50)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(40)
             
         }
+        noSearchLabel.snp.makeConstraints { make in
+            make.top.equalTo(noSearchImageView.snp.bottom).offset(8)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(20)
+        }
+        
+        recentSearchLabel.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(8)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.height.equalTo(20)
+        }
+        removeAllSearch.snp.makeConstraints { make in
+            make.bottom.equalTo(recentSearchLabel.snp.bottom)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.height.equalTo(20)
+        }
+        recentSearchTableView.snp.makeConstraints { make in
+            make.top.equalTo(recentSearchLabel.snp.bottom).offset(8)
+            make.horizontalEdges.bottom.equalToSuperview()
+        }
+        
+        
     }
     func configureUI() {
         view.backgroundColor = Color.white
@@ -95,44 +97,58 @@ class SearchMainViewController: UIViewController {
         navigationItem.title = "\(nickname)'s MEANING OUT"
         
         searchBar.placeholder = "브랜드, 상품 등을 입력하세요"
+        
+        noSearchImageView.image = UIImage.empty
+        noSearchLabel.contentMode = .scaleAspectFill
+        noSearchLabel.text = "최근 검색어가 없어요"
+        noSearchLabel.font = Font.bold14
+        noSearchLabel.textAlignment = .center
+        
+        recentSearchLabel.text = "최근 검색"
+        recentSearchLabel.textColor = Color.black
+        recentSearchLabel.font = Font.bold14
+        
+        removeAllSearch.setTitle("전체 삭제", for: .normal)
+        removeAllSearch.setTitleColor(Color.mainColor, for: .normal)
+        removeAllSearch.titleLabel?.font = Font.regular13
+        removeAllSearch.addTarget(self, action: #selector(removeAllButtonClicked), for: .touchUpInside)
         if searchList.count == 0 {
-            noSearchImageView.image = UIImage.empty
-            noSearchLabel.contentMode = .scaleAspectFill
-            noSearchLabel.text = "최근 검색어가 없어요"
-            noSearchLabel.font = Font.bold14
-            noSearchLabel.textAlignment = .center
+            recentSearchLabel.isHidden = true
+            removeAllSearch.isHidden = true
+            recentSearchTableView.isHidden = true
+            noSearchImageView.isHidden = false
+            noSearchLabel.isHidden = false
         } else {
-            recentSearchLabel.text = "최근 검색"
-            recentSearchLabel.textColor = Color.black
-            recentSearchLabel.font = Font.bold14
-            
-            removeAllSearch.setTitle("전체 삭제", for: .normal)
-            removeAllSearch.setTitleColor(Color.mainColor, for: .normal)
-            removeAllSearch.titleLabel?.font = Font.regular13
-            removeAllSearch.addTarget(self, action: #selector(removeAllButtonClicked), for: .touchUpInside)
-            
+            recentSearchLabel.isHidden = false
+            removeAllSearch.isHidden = false
+            recentSearchTableView.isHidden = false
+            noSearchImageView.isHidden = true
+            noSearchLabel.isHidden = true
         }
+        
+        
         
     }
     func configureView() {
         searchBar.delegate = self
         
-        if searchList.count != 0 {
-            recentSearchTableView.delegate = self
-            recentSearchTableView.dataSource = self
-            recentSearchTableView.register(RecentSearchTableViewCell.self, forCellReuseIdentifier: RecentSearchTableViewCell.id)
-            
-            recentSearchTableView.rowHeight = 40
-        }
+        recentSearchTableView.delegate = self
+        recentSearchTableView.dataSource = self
+        recentSearchTableView.register(RecentSearchTableViewCell.self, forCellReuseIdentifier: RecentSearchTableViewCell.id)
         
+        recentSearchTableView.rowHeight = 40
     }
     
     @objc func removeAllButtonClicked() {
         UserDefaults.standard.removeObject(forKey: UserDefaultsKey.recentSearch)
         searchList = []
-        self.loadView()
+        recentSearchLabel.isHidden = true
+        removeAllSearch.isHidden = true
+        recentSearchTableView.isHidden = true
+        noSearchImageView.isHidden = false
+        noSearchLabel.isHidden = false
         
-        self.viewDidLoad()
+     
     }
 }
 
@@ -150,7 +166,13 @@ extension SearchMainViewController: UISearchBarDelegate {
         UserDefaults.standard.set(searchList, forKey: UserDefaultsKey.recentSearch)
         
         if searchList.count == 1 {
-            self.viewDidLoad()
+
+            noSearchImageView.isHidden = true
+            noSearchLabel.isHidden = true
+            recentSearchLabel.isHidden = false
+            removeAllSearch.isHidden = false
+            recentSearchTableView.isHidden = false
+            
         }
         recentSearchTableView.reloadData()
         
@@ -204,8 +226,11 @@ extension SearchMainViewController: UITableViewDelegate, UITableViewDataSource {
         UserDefaults.standard.set(searchList, forKey: UserDefaultsKey.recentSearch)
         
         if searchList.count == 0 {
-            self.loadView()
-            self.viewDidLoad()
+            noSearchImageView.isHidden = false
+            noSearchLabel.isHidden = false
+            recentSearchLabel.isHidden = true
+            removeAllSearch.isHidden = true
+            recentSearchTableView.isHidden = true
         } else {
             recentSearchTableView.reloadData()
         }
