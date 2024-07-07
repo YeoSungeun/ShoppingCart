@@ -14,6 +14,10 @@
 		A08890ED2C2022C400D8557E /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08890EC2C2022C400D8557E /* Result.swift */; };
 		A08890EF2C20772600D8557E /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08890EE2C20772600D8557E /* UIButton+Extension.swift */; };
 		A08890F12C2090DD00D8557E /* ResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08890F02C2090DD00D8557E /* ResultCollectionViewCell.swift */; };
+		A0B9F7362C3AE5BA0050454B /* LikedItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9F7352C3AE5BA0050454B /* LikedItemsViewController.swift */; };
+		A0B9F7382C3AE96C0050454B /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9F7372C3AE96C0050454B /* RealmModel.swift */; };
+		A0B9F73B2C3AE9BE0050454B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A0B9F73A2C3AE9BE0050454B /* RealmSwift */; };
+		A0B9F73D2C3AED230050454B /* LikedItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9F73C2C3AED230050454B /* LikedItemRepository.swift */; };
 		A0D27C7E2C28814E00FE5ABE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D27C7D2C28814E00FE5ABE /* NetworkManager.swift */; };
 		A0D27CC92C296DD900FE5ABE /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D27CC82C296DD900FE5ABE /* UIViewController+Extension.swift */; };
 		A0EE576C2C1AF8BE00A5E53B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EE576B2C1AF8BE00A5E53B /* AppDelegate.swift */; };
@@ -51,6 +55,9 @@
 		A08890EC2C2022C400D8557E /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		A08890EE2C20772600D8557E /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		A08890F02C2090DD00D8557E /* ResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCollectionViewCell.swift; sourceTree = "<group>"; };
+		A0B9F7352C3AE5BA0050454B /* LikedItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedItemsViewController.swift; sourceTree = "<group>"; };
+		A0B9F7372C3AE96C0050454B /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
+		A0B9F73C2C3AED230050454B /* LikedItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedItemRepository.swift; sourceTree = "<group>"; };
 		A0D27C7D2C28814E00FE5ABE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A0D27CC82C296DD900FE5ABE /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		A0EE57682C1AF8BE00A5E53B /* ShoppingCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +93,7 @@
 				A0EE57952C1B057E00A5E53B /* Alamofire in Frameworks */,
 				A0EE57982C1B058800A5E53B /* SnapKit in Frameworks */,
 				A0EE57922C1B057300A5E53B /* Kingfisher in Frameworks */,
+				A0B9F73B2C3AE9BE0050454B /* RealmSwift in Frameworks */,
 				A0EE578F2C1B056A00A5E53B /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,6 +117,52 @@
 				A08890EC2C2022C400D8557E /* Result.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		A0B9F7312C3ADFF30050454B /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				A0EE579B2C1B10A800A5E53B /* CustomView */,
+				A0EE578C2C1B02B200A5E53B /* Extension */,
+				A0EE57892C1B00D900A5E53B /* Constant */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		A0B9F7322C3AE0340050454B /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				A0B9F7372C3AE96C0050454B /* RealmModel.swift */,
+				A0B9F73C2C3AED230050454B /* LikedItemRepository.swift */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
+		A0B9F7332C3AE0450050454B /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				A0EE57B22C1C326700A5E53B /* MainTabBarViewController.swift */,
+				A0EE57992C1B0A1300A5E53B /* OnBoardingViewController.swift */,
+				A0EE57A02C1B17EA00A5E53B /* ProfileNicknameSettingViewController.swift */,
+				A0EE57A22C1B17F700A5E53B /* ProfileImageSettingViewController.swift */,
+				A0EE57B42C1D757400A5E53B /* ProfileImageSettingCollectionViewCell.swift */,
+				A0EE57AA2C1C30A500A5E53B /* SearchMainViewController.swift */,
+				A08890B62C1EC39C00D8557E /* RecentSearchTableViewCell.swift */,
+				A0EE57AC2C1C30B500A5E53B /* SearchResultViewController.swift */,
+				A08890F02C2090DD00D8557E /* ResultCollectionViewCell.swift */,
+				A0EE57AE2C1C30D600A5E53B /* DetailViewController.swift */,
+				A0B9F7352C3AE5BA0050454B /* LikedItemsViewController.swift */,
+				A08890BB2C1F987700D8557E /* Setting */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		A0B9F7342C3AE06A0050454B /* NetWorkManager */ = {
+			isa = PBXGroup;
+			children = (
+				A0D27C7D2C28814E00FE5ABE /* NetworkManager.swift */,
+			);
+			path = NetWorkManager;
 			sourceTree = "<group>";
 		};
 		A0EE575F2C1AF8BD00A5E53B = {
@@ -138,23 +192,11 @@
 				A0EE57762C1AF8BF00A5E53B /* LaunchScreen.storyboard */,
 				A0EE57792C1AF8BF00A5E53B /* Info.plist */,
 				A0EE57812C1AF9E600A5E53B /* APIKey.swift */,
-				A0EE57852C1AFF4200A5E53B /* ReuseIdnetifierProtocol.swift */,
-				A0EE57892C1B00D900A5E53B /* Constant */,
-				A0EE578C2C1B02B200A5E53B /* Extension */,
-				A0EE579B2C1B10A800A5E53B /* CustomView */,
+				A0B9F7312C3ADFF30050454B /* Global */,
+				A0B9F7342C3AE06A0050454B /* NetWorkManager */,
+				A0B9F7322C3AE0340050454B /* DataBase */,
 				A08890EB2C2022B300D8557E /* Data */,
-				A0EE57992C1B0A1300A5E53B /* OnBoardingViewController.swift */,
-				A0EE57A02C1B17EA00A5E53B /* ProfileNicknameSettingViewController.swift */,
-				A0EE57A22C1B17F700A5E53B /* ProfileImageSettingViewController.swift */,
-				A0EE57B42C1D757400A5E53B /* ProfileImageSettingCollectionViewCell.swift */,
-				A0EE57AA2C1C30A500A5E53B /* SearchMainViewController.swift */,
-				A08890B62C1EC39C00D8557E /* RecentSearchTableViewCell.swift */,
-				A0EE57AC2C1C30B500A5E53B /* SearchResultViewController.swift */,
-				A08890F02C2090DD00D8557E /* ResultCollectionViewCell.swift */,
-				A0EE57AE2C1C30D600A5E53B /* DetailViewController.swift */,
-				A08890BB2C1F987700D8557E /* Setting */,
-				A0EE57B22C1C326700A5E53B /* MainTabBarViewController.swift */,
-				A0D27C7D2C28814E00FE5ABE /* NetworkManager.swift */,
+				A0B9F7332C3AE0450050454B /* Screen */,
 			);
 			path = ShoppingCart;
 			sourceTree = "<group>";
@@ -174,6 +216,7 @@
 				A08890EE2C20772600D8557E /* UIButton+Extension.swift */,
 				A03940BA2C2130D300D650F3 /* String+Extension.swift */,
 				A0D27CC82C296DD900FE5ABE /* UIViewController+Extension.swift */,
+				A0EE57852C1AFF4200A5E53B /* ReuseIdnetifierProtocol.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -208,6 +251,7 @@
 				A0EE57912C1B057300A5E53B /* Kingfisher */,
 				A0EE57942C1B057E00A5E53B /* Alamofire */,
 				A0EE57972C1B058800A5E53B /* SnapKit */,
+				A0B9F73A2C3AE9BE0050454B /* RealmSwift */,
 			);
 			productName = ShoppingCart;
 			productReference = A0EE57682C1AF8BE00A5E53B /* ShoppingCart.app */;
@@ -242,6 +286,7 @@
 				A0EE57902C1B057300A5E53B /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				A0EE57932C1B057E00A5E53B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				A0EE57962C1B058800A5E53B /* XCRemoteSwiftPackageReference "SnapKit" */,
+				A0B9F7392C3AE9BE0050454B /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = A0EE57692C1AF8BE00A5E53B /* Products */;
 			projectDirPath = "";
@@ -282,9 +327,12 @@
 				A03940BB2C2130D300D650F3 /* String+Extension.swift in Sources */,
 				A0EE57862C1AFF4200A5E53B /* ReuseIdnetifierProtocol.swift in Sources */,
 				A0EE579D2C1B10DE00A5E53B /* PointButton.swift in Sources */,
+				A0B9F7382C3AE96C0050454B /* RealmModel.swift in Sources */,
 				A0EE57702C1AF8BE00A5E53B /* ViewController.swift in Sources */,
+				A0B9F73D2C3AED230050454B /* LikedItemRepository.swift in Sources */,
 				A08890ED2C2022C400D8557E /* Result.swift in Sources */,
 				A0EE579A2C1B0A1300A5E53B /* OnBoardingViewController.swift in Sources */,
+				A0B9F7362C3AE5BA0050454B /* LikedItemsViewController.swift in Sources */,
 				A08890BD2C1F989900D8557E /* SettingListTableViewCell.swift in Sources */,
 				A0EE576C2C1AF8BE00A5E53B /* AppDelegate.swift in Sources */,
 				A0D27C7E2C28814E00FE5ABE /* NetworkManager.swift in Sources */,
@@ -523,6 +571,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A0B9F7392C3AE9BE0050454B /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.52.1;
+			};
+		};
 		A0EE578D2C1B056A00A5E53B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
@@ -558,6 +614,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A0B9F73A2C3AE9BE0050454B /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0B9F7392C3AE9BE0050454B /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		A0EE578E2C1B056A00A5E53B /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A0EE578D2C1B056A00A5E53B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
